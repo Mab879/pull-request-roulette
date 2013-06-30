@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130515004149) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20130630025822) do
 
   create_table "pull_requests", force: true do |t|
     t.datetime "created_at"
@@ -24,6 +21,7 @@ ActiveRecord::Schema.define(version: 20130515004149) do
     t.integer  "number",     default: 0,         null: false
     t.string   "submitter",  default: "UNKNOWN", null: false
     t.string   "author",     default: "UNKNOWN", null: false
+    t.string   "language"
   end
 
 end

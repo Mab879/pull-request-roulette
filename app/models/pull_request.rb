@@ -31,6 +31,7 @@ class PullRequest < ActiveRecord::Base
     return false unless found?
     return false unless open?
     set_author
+    set_language
     true
   end
 
@@ -48,6 +49,10 @@ class PullRequest < ActiveRecord::Base
 
   def set_author
     self.author = @pr_data.user.login
+  end
+
+  def set_language
+    self.language = fetch_repo_languages.to_json.to_s
   end
 
   def to_url
@@ -70,13 +75,20 @@ class PullRequest < ActiveRecord::Base
 
   private
 
+  def github
+    Github.new client_id: ENV['GITHUB_KEY'], client_secret: ENV['GITHUB_SECRET']
+  end
+
   def fetch_pr_data
-    github = Github.new client_id: ENV['GITHUB_KEY'], client_secret: ENV['GITHUB_SECRET']
     begin
       github.pull_requests.find(user, repo, number)
     rescue ArgumentError, Github::Error::NotFound, URI::InvalidURIError
       nil
     end
+  end
+  
+  def fetch_repo_languages
+    github.repos.languages(user, repo)
   end
 
 end

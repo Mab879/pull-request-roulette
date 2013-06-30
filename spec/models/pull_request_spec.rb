@@ -5,7 +5,7 @@ describe PullRequest do
   describe '.from_url' do
 
     it 'accepts open pulls' do
-        PullRequest.from_url(url: open_pr_url, submitter: 'some-handle').should be_valid
+      PullRequest.from_url(url: open_pr_url, submitter: 'some-handle').should be_valid
     end
 
   end
