@@ -20,7 +20,8 @@ development:
   database: pullrequestroulette_development
   pool: 5
   username: pullrequestroulette
-  password:
+  password: pullrequestroulette
+  host: localhost
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -48,9 +49,10 @@ test:
   encoding: unicode
   database: pullrequestroulette_test
   pool: 5
-  username: postgres  # seems travis wants this, not pullrequestroulette
-  # username: pullrequestroulette  # but heroku wants this!  wtf?!
-  password:
+  # username: postgres  # seems travis wants this, not pullrequestroulette
+  username: pullrequestroulette  # but heroku wants this!  wtf?!
+  password: pullrequestroulette
+  host: localhost
 
 production:
   adapter: postgresql
